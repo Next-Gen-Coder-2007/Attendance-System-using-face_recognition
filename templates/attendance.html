@@ -653,15 +653,15 @@
                     const externalCamera = videoDevices[0];
 
                     if (!externalCamera) {
-                        const externalCamera = videoDevices[1];
+                        externalCamera = videoDevices[1];
                     }
 
-                    stream = await navigator.mediaDevices.getUserMedia({
+                    const stream = await navigator.mediaDevices.getUserMedia({
                         video: {
                             width: { ideal: 640 },
                             height: { ideal: 480 },
                             facingMode: 'user',
-                            deviceId: { exact: externalCamera.deviceId }
+                            deviceId: externalCamera ? { ideal: externalCamera.deviceId } : undefined
                         }
                     });
 
