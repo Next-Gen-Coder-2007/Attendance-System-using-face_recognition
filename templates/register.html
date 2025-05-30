@@ -24,7 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* Background Animation */
         .bg-particles {
             position: fixed;
             top: 0;
@@ -614,7 +613,6 @@
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .form-section {
                 grid-template-columns: 1fr;
@@ -773,7 +771,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // DOM Elements
+
             const webcamVideo = document.getElementById('webcamVideo');
             const webcamContainer = document.getElementById('webcamContainer');
             const webcamPlaceholder = document.getElementById('webcamPlaceholder');
@@ -786,7 +784,6 @@
             const faceData = document.getElementById('faceData');
             const feedbackMessage = document.getElementById('feedbackMessage');
 
-            // Status Elements
             const cameraStatus = document.getElementById('cameraStatus');
             const cameraIndicator = document.getElementById('cameraIndicator');
             const faceStatus = document.getElementById('faceStatus');
@@ -797,7 +794,6 @@
             let isCapturing = false;
             let faceCaptured = false;
 
-            // Create floating particles
             function createParticles() {
                 const particlesContainer = document.getElementById('particles');
                 for (let i = 0; i < 50; i++) {
@@ -810,26 +806,16 @@
                 }
             }
 
-            // Initialize particles
             createParticles();
 
-            // Enable Camera
             enableCameraBtn.addEventListener('click', async function () {
                 try {
                     this.classList.add('loading');
                     this.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>Enabling...';
 
-                    // stream = await navigator.mediaDevices.getUserMedia({
-                    //     video: {
-                    // width: { ideal: 640 },
-                    // height: { ideal: 480 },
-                    // facingMode: 'user'
-                    //     }
-                    // });
                     const devices = await navigator.mediaDevices.enumerateDevices();
                     const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-                    // Assuming the second camera is the external webcam (index 1)
                     const externalCamera = videoDevices[0];
 
                     if (!externalCamera) {
@@ -845,7 +831,6 @@
                         }
                     });
 
-                    // Attach to a video element for preview
                     const video = document.querySelector('video');
                     video.srcObject = stream;
                     webcamVideo.srcObject = stream;
@@ -854,13 +839,11 @@
                     webcamContainer.classList.add('active');
                     webcamOverlay.classList.add('recording');
 
-                    // Update status
                     cameraStatus.textContent = 'Active';
                     cameraIndicator.classList.add('active');
                     faceStatus.textContent = 'Detecting...';
                     faceIndicator.classList.add('active');
 
-                    // Enable capture button
                     captureBtn.disabled = false;
                     this.disabled = true;
                     this.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i>Camera Active';
@@ -868,7 +851,6 @@
 
                     showFeedback('Camera enabled successfully! Position the student for face capture.', 'success');
 
-                    // Simulate face detection after a delay
                     setTimeout(() => {
                         faceStatus.textContent = 'Face detected';
                         showFeedback('Face detected! Ready to capture biometric data.', 'success');
@@ -885,7 +867,6 @@
                 }
             });
 
-            // Capture Face
             captureBtn.addEventListener('click', function () {
                 if (!stream || isCapturing) return;
 
@@ -893,32 +874,26 @@
                 this.classList.add('loading');
                 this.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>Capturing...';
 
-                // Show capture animation
                 captureOverlay.style.display = 'block';
                 setTimeout(() => {
                     captureOverlay.style.display = 'none';
                 }, 1000);
 
-                // Create canvas to capture image
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
                 canvas.width = webcamVideo.videoWidth;
                 canvas.height = webcamVideo.videoHeight;
 
-                // Draw current video frame to canvas
                 context.drawImage(webcamVideo, 0, 0);
 
-                // Convert to base64
                 const dataURL = canvas.toDataURL('image/jpeg', 0.8);
                 faceData.value = dataURL;
 
-                // Simulate processing time
                 setTimeout(() => {
                     faceCaptured = true;
                     faceStatus.textContent = 'Face captured successfully';
                     registrationStatus.textContent = 'Ready to register';
 
-                    // Enable register button
                     registerBtn.disabled = false;
                     this.disabled = true;
                     this.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i>Face Captured';
@@ -929,7 +904,6 @@
                 }, 1500);
             });
 
-            // Form Validation and Submission
             registrationForm.addEventListener('submit', function (e) {
                 const name = document.getElementById('studentName').value.trim();
 
@@ -945,7 +919,6 @@
                     return;
                 }
 
-                // Show loading state
                 registerBtn.classList.add('loading');
                 registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>Registering...';
                 registerBtn.disabled = true;
