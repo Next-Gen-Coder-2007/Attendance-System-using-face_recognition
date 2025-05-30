@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: attendance-management
-    env: docker
-    dockerfilePath: ./Dockerfile
-    plan: free
-    region: oregon
