@@ -12,40 +12,40 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         .header {
-            /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+
             color: white;
             padding: 2rem;
             border-radius: 12px;
             margin-bottom: 2rem;
-            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-        
+
         .download-form {
             background: white;
             padding: 2rem;
@@ -53,18 +53,18 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: #2c3e50;
         }
-        
+
         .form-control {
             width: 100%;
             padding: 0.75rem;
@@ -73,19 +73,19 @@
             font-size: 1rem;
             transition: border-color 0.3s ease;
         }
-        
+
         .form-control:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
-        
+
         .checkbox-group {
             border: 2px solid #e1e8ed;
             border-radius: 8px;
@@ -93,29 +93,29 @@
             max-height: 200px;
             overflow-y: auto;
         }
-        
+
         .checkbox-item {
             display: flex;
             align-items: center;
             padding: 0.5rem 0;
             border-bottom: 1px solid #f8f9fa;
         }
-        
+
         .checkbox-item:last-child {
             border-bottom: none;
         }
-        
+
         .checkbox-item input[type="checkbox"] {
             margin-right: 0.75rem;
             transform: scale(1.2);
         }
-        
+
         .checkbox-item label {
             margin: 0;
             cursor: pointer;
             font-weight: normal;
         }
-        
+
         .select-all-btn {
             background-color: #6c757d;
             color: white;
@@ -127,11 +127,11 @@
             margin-bottom: 1rem;
             transition: background-color 0.3s ease;
         }
-        
+
         .select-all-btn:hover {
             background-color: #5a6268;
         }
-        
+
         .download-btn {
             background: linear-gradient(135deg, #28a745, #20c997);
             color: white;
@@ -144,19 +144,19 @@
             width: 100%;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        
+
         .download-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
-        
+
         .download-btn:disabled {
             background: #6c757d;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
-        
+
         .error-message {
             background-color: #f8d7da;
             color: #721c24;
@@ -165,7 +165,7 @@
             margin-bottom: 1rem;
             border: 1px solid #f5c6cb;
         }
-        
+
         .success-message {
             background-color: #d4edda;
             color: #155724;
@@ -174,16 +174,16 @@
             margin-bottom: 1rem;
             border: 1px solid #c3e6cb;
         }
-        
+
         @media (max-width: 768px) {
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
+
             .header h1 {
                 font-size: 2rem;
             }
-            
+
             .container {
                 padding: 10px;
             }
@@ -196,7 +196,7 @@
             <h1>Download Reports</h1>
             <p>Export attendance data with custom filters</p>
         </div>
-        
+
         <form method="POST" action="{{ url_for('download_csv') }}" class="download-form">
             <div class="form-group">
                 <label for="report_type">Report Type:</label>
@@ -207,7 +207,7 @@
                     <option value="absent_only">Absent Students Only</option>
                 </select>
             </div>
-            
+
             <div class="form-group" id="student_selection" style="display: none;">
                 <label>Select Students:</label>
                 <button type="button" class="select-all-btn" onclick="toggleAllStudents()">Select All / Deselect All</button>
@@ -223,19 +223,19 @@
                     {% endfor %}
                 </div>
             </div>
-            
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="from_date">From Date:</label>
                     <input type="date" name="from_date" id="from_date" class="form-control" value="{{ default_from_date }}">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="to_date">To Date:</label>
                     <input type="date" name="to_date" id="to_date" class="form-control" value="{{ default_to_date }}">
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label for="include_absent">Include Absent Students:</label>
                 <select name="include_absent" id="include_absent" class="form-control">
@@ -243,7 +243,7 @@
                     <option value="no">No - Only show students with attendance records</option>
                 </select>
             </div>
-            
+
             <button type="submit" class="download-btn">
                 Download CSV Report
             </button>
@@ -254,33 +254,31 @@
         function toggleStudentSelection() {
             const reportType = document.getElementById('report_type').value;
             const studentSelection = document.getElementById('student_selection');
-            
+
             if (reportType === 'selected_students') {
                 studentSelection.style.display = 'block';
             } else {
                 studentSelection.style.display = 'none';
             }
         }
-        
+
         function toggleAllStudents() {
             const checkboxes = document.querySelectorAll('input[name="selected_students"]');
             const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-            
+
             checkboxes.forEach(cb => {
                 cb.checked = !allChecked;
             });
         }
-        
-        // Set max date to today
+
         document.getElementById('to_date').max = new Date().toISOString().split('T')[0];
         document.getElementById('from_date').max = new Date().toISOString().split('T')[0];
-        
-        // Validate date range
+
         document.getElementById('from_date').addEventListener('change', function() {
             const fromDate = this.value;
             const toDateField = document.getElementById('to_date');
             toDateField.min = fromDate;
-            
+
             if (toDateField.value && toDateField.value < fromDate) {
                 toDateField.value = fromDate;
             }
