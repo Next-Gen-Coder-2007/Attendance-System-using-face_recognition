@@ -17,6 +17,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from io import BytesIO
+import pytz
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-here'
@@ -289,14 +290,17 @@ def submit_attendance():
         ).first()
 
         if existing_record:
-            flash(f'Attendance already recorded for {student.name} today at {existing_record.time.strftime("%H:%M:%S")}.', 'warning')
+            flash(f'Attendance already recorded for {student.name} today at {existing_record.time.astimezone(pytz.timezone('Asia/Kolkata')).strftime("%I:%M:%S %p")}.', 'warning')
             return redirect(url_for('attendance_page'))
 
+        ist = pytz.timezone('Asia/Kolkata')
+        attendance_time = datetime.now(ist)
+        
         attendance = AttendanceRecord(
             student_id=student.id,
             confidence_score=confidence,
             status='present',
-            time=datetime.now(),
+            time=attendance_time,
             date=today
         )
 
