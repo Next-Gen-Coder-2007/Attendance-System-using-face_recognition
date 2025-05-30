@@ -51,6 +51,10 @@ class AttendanceRecord(db.Model):
     def __repr__(self):
         return f'<AttendanceRecord {self.student.name} - {self.date}>'
 
+def show_time():
+    india_tz = pytz.timezone("Asia/Kolkata")
+    return datetime.now(india_tz)
+
 def process_image_data(image_data):
     try:
         print(f"Processing image data... Length: {len(image_data) if image_data else 0}")
@@ -289,18 +293,18 @@ def submit_attendance():
             date=today
         ).first()
 
+        utc_time = utc.localize(existing_record.time) if existing_record.time.tzinfo is None else existing_record.time
+        ist_time = utc_time.astimezone(ist)
+        
         if existing_record:
-            flash(f"Attendance already recorded for {student.name} today at {existing_record.time.astimezone(pytz.timezone('Asia/Kolkata')).strftime('%I:%M:%S %p')}.", 'warning')
+            flash(f"Attendance already recorded for {student.name} today at {ist_time.strftime('%I:%M:%S %p')}.", 'warning')
             return redirect(url_for('attendance_page'))
 
-        ist = pytz.timezone('Asia/Kolkata')
-        attendance_time = datetime.now(ist)
-        
         attendance = AttendanceRecord(
             student_id=student.id,
             confidence_score=confidence,
             status='present',
-            time=attendance_time,
+            time=datetime.utcnow(),
             date=today
         )
 
