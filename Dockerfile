@@ -1,6 +1,5 @@
 FROM python:3.12-slim
 
-# Install system dependencies needed for dlib and face_recognition
 RUN apt-get update && apt-get install -y \
     cmake \
     build-essential \
@@ -12,18 +11,14 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /app
-
-# Copy all files into container
 COPY . /app
 
-# Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Expose port (Flask default)
-EXPOSE 5000
+ENV FLASK_APP=run.py
+ENV FLASK_ENV=development
 
-# Run the app
-CMD ["python", "run.py"]
+EXPOSE 5000
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
