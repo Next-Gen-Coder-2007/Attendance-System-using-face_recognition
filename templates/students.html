@@ -12,7 +12,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -20,13 +20,13 @@
             color: #2d3748;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
-        
+
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -38,7 +38,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 3rem;
             font-weight: 700;
@@ -49,13 +49,13 @@
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
-        
+
         .header p {
             font-size: 1.2rem;
             color: #718096;
             font-weight: 400;
         }
-        
+
         .stats-bar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -67,11 +67,11 @@
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             text-align: center;
         }
-        
+
         .stat-item {
             display: inline-block;
         }
-        
+
         .stat-number {
             font-size: 3rem;
             font-weight: 800;
@@ -82,21 +82,21 @@
             display: block;
             line-height: 1;
         }
-        
+
         .stat-label {
             color: #718096;
             font-size: 1rem;
             font-weight: 500;
             margin-top: 0.5rem;
         }
-        
+
         .students-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
-        
+
         .student-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
@@ -109,7 +109,7 @@
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
-        
+
         .student-card::before {
             content: '';
             position: absolute;
@@ -119,19 +119,19 @@
             height: 4px;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
         }
-        
+
         .student-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 1.5rem;
         }
-        
+
         .student-name {
             font-size: 1.5rem;
             font-weight: 700;
@@ -139,13 +139,13 @@
             margin: 0;
             line-height: 1.2;
         }
-        
+
         .action-buttons {
             display: flex;
             gap: 0.75rem;
             flex-shrink: 0;
         }
-        
+
         .action-btn {
             width: 40px;
             height: 40px;
@@ -160,7 +160,7 @@
             position: relative;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
-        
+
         .action-btn::before {
             content: '';
             position: absolute;
@@ -170,22 +170,22 @@
             opacity: 0;
             transition: opacity 0.2s ease;
         }
-        
+
         .action-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             border-color: #cbd5e0;
         }
-        
+
         .action-btn:hover::before {
             opacity: 1;
         }
-        
+
         .action-btn:active {
             transform: translateY(0);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
-        
+
         .action-btn svg {
             width: 18px;
             height: 18px;
@@ -194,11 +194,11 @@
             z-index: 1;
             transition: color 0.2s ease;
         }
-        
+
         .action-btn:hover svg {
             color: #2d3748;
         }
-        
+
         .student-info {
             display: flex;
             align-items: center;
@@ -207,15 +207,14 @@
             margin-bottom: 0.75rem;
             font-weight: 500;
         }
-        
+
         .student-info svg {
             width: 16px;
             height: 16px;
             margin-right: 0.75rem;
             color: #a0aec0;
         }
-        
-        /* Modal Styles */
+
         .modal {
             display: none;
             position: fixed;
@@ -230,11 +229,11 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .modal.show {
             opacity: 1;
         }
-        
+
         .modal-content {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
@@ -251,17 +250,17 @@
             transform: scale(0.9) translateY(-20px);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
+
         .modal.show .modal-content {
             transform: scale(1) translateY(0);
         }
-        
+
         .modal-header {
             padding: 2rem 2rem 1rem;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             position: relative;
         }
-        
+
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
@@ -271,7 +270,7 @@
             background-clip: text;
             margin: 0;
         }
-        
+
         .modal-close {
             position: absolute;
             right: 2rem;
@@ -289,20 +288,20 @@
             justify-content: center;
             border-radius: 12px;
         }
-        
+
         .modal-close:hover {
             color: #2d3748;
             background: rgba(0, 0, 0, 0.05);
         }
-        
+
         .modal-body {
             padding: 2rem;
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
@@ -310,7 +309,7 @@
             color: #2d3748;
             font-size: 0.95rem;
         }
-        
+
         .form-input {
             width: 100%;
             padding: 0.75rem 1rem;
@@ -320,27 +319,27 @@
             transition: all 0.2s ease;
             background: rgba(255, 255, 255, 0.8);
         }
-        
+
         .form-input:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
             background: rgba(255, 255, 255, 1);
         }
-        
+
         .form-input:disabled {
             background: rgba(0, 0, 0, 0.05);
             color: #718096;
             cursor: not-allowed;
         }
-        
+
         .modal-footer {
             padding: 1rem 2rem 2rem;
             display: flex;
             justify-content: flex-end;
             gap: 1rem;
         }
-        
+
         .btn {
             padding: 0.75rem 1.5rem;
             border-radius: 12px;
@@ -353,30 +352,30 @@
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
         }
-        
+
         .btn-secondary {
             background: rgba(255, 255, 255, 0.8);
             color: #4a5568;
             border: 2px solid #e2e8f0;
         }
-        
+
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 1);
             border-color: #cbd5e0;
             transform: translateY(-1px);
         }
-        
+
         .info-item {
             display: flex;
             align-items: center;
@@ -386,24 +385,24 @@
             border-radius: 12px;
             border-left: 4px solid #667eea;
         }
-        
+
         .info-item svg {
             width: 20px;
             height: 20px;
             margin-right: 1rem;
             color: #667eea;
         }
-        
+
         .info-label {
             font-weight: 600;
             color: #2d3748;
             margin-right: 0.5rem;
         }
-        
+
         .info-value {
             color: #4a5568;
         }
-        
+
         .no-students {
             text-align: center;
             padding: 4rem 2rem;
@@ -414,32 +413,32 @@
             border-radius: 20px;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
         }
-        
+
         .no-students-icon {
             width: 80px;
             height: 80px;
             margin: 0 auto 2rem;
             color: #cbd5e0;
         }
-        
+
         .no-students h3 {
             font-size: 1.5rem;
             font-weight: 600;
             color: #4a5568;
             margin-bottom: 0.5rem;
         }
-        
+
         .no-students p {
             color: #718096;
             font-size: 1rem;
         }
-        
+
         .loading {
             text-align: center;
             padding: 2rem;
             color: #718096;
         }
-        
+
         .spinner {
             border: 3px solid #f3f3f3;
             border-top: 3px solid #667eea;
@@ -449,62 +448,62 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 1rem;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
             }
-            
+
             .students-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .header {
                 padding: 2rem 1.5rem;
             }
-            
+
             .header h1 {
                 font-size: 2.5rem;
             }
-            
+
             .student-card {
                 padding: 1.5rem;
             }
-            
+
             .card-header {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .action-buttons {
                 align-self: flex-end;
             }
-            
+
             .modal-content {
                 margin: 10% auto;
                 width: 95%;
             }
-            
+
             .modal-header, .modal-body, .modal-footer {
                 padding: 1.5rem;
             }
         }
-        
+
         @media (max-width: 480px) {
             .header h1 {
                 font-size: 2rem;
             }
-            
+
             .students-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .modal-footer {
                 flex-direction: column;
             }
@@ -603,7 +602,7 @@
         {% endif %}
     </div>
 
-    <!-- View Student Modal -->
+    
     <div id="viewModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -665,7 +664,7 @@
         </div>
     </div>
 
-    <!-- Edit Student Modal -->
+    
     <div id="editModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
