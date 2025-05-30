@@ -1,24 +1,30 @@
-FROM python:3.12-slim
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    cmake \
     build-essential \
+    cmake \
+    git \
+    libgtk2.0-dev \
     libboost-all-dev \
     libopenblas-dev \
     liblapack-dev \
     libx11-dev \
-    libgtk-3-dev \
-    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Set working directory
 WORKDIR /app
-COPY . /app
 
+# Copy app files
+COPY . .
+
+# Install Python dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-ENV FLASK_APP=run.py
-ENV FLASK_ENV=development
-
+# Expose port
 EXPOSE 5000
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+
+# Start the app using gunicorn
+CMD ["gunicorn", "run:app", "--bind", "0.0.0.0:8000"]
