@@ -573,9 +573,9 @@
     </div>
 
     <script>
-        // Add smooth scrolling and enhanced interactions
+
         document.addEventListener('DOMContentLoaded', function () {
-            // Animate cards on scroll
+
             const cards = document.querySelectorAll('.card');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
@@ -588,7 +588,6 @@
 
             cards.forEach(card => observer.observe(card));
 
-            // Add click ripple effect to buttons
             const buttons = document.querySelectorAll('.btn');
             buttons.forEach(button => {
                 button.addEventListener('click', function (e) {
@@ -611,7 +610,6 @@
                 });
             });
 
-            // Form validation with visual feedback
             const timeInputs = document.querySelectorAll('input[type="time"]');
             timeInputs.forEach(input => {
                 input.addEventListener('change', function () {
@@ -619,7 +617,7 @@
                     this.style.backgroundColor = '#f0fdf4';
                 });
             });
-            // Update stats with animation (simulated)
+
             const statNumbers = document.querySelectorAll('.stat-number');
 
             statNumbers.forEach((stat, index) => {
@@ -633,12 +631,11 @@
                         stat.textContent = Math.floor(currentValue);
                         requestAnimationFrame(updateStat);
                     } else {
-                        // Add "%" only for the last stat element
+
                         stat.textContent = index === statNumbers.length - 1 ? finalValue + "%" : finalValue;
                     }
                 };
 
-                // Simulate random delay before starting the animation
                 setTimeout(updateStat, Math.random() * 1000);
             });
 
