@@ -165,27 +165,10 @@
 </head>
 <body>
     <div class="error-container">
-        <!-- Error Icon based on error type -->
-        <div class="error-icon">
-            {% if error_code == 404 %}
-                🔍
-            {% elif error_code == 403 %}
-                🔒
-            {% elif error_code == 500 %}
-                ⚠️
-            {% elif error_code in [502, 503, 504] %}
-                🌐
-            {% else %}
-                ❌
-            {% endif %}
-        </div>
-
-        <!-- Error Code Display -->
         {% if error_code %}
         <div class="error-code">{{ error_code }}</div>
         {% endif %}
 
-        <!-- Error Title -->
         <h1 class="error-title">
             {% if error_title %}
                 {{ error_title }}
@@ -208,7 +191,6 @@
             {% endif %}
         </h1>
 
-        <!-- Error Message -->
         <div class="error-message">
             {% if error_message %}
                 {{ error_message }}
@@ -227,7 +209,6 @@
             {% endif %}
         </div>
 
-        <!-- Technical Details (for development/debugging) -->
         {% if show_details and (error_details or exception_message) %}
         <div class="error-details">
             <strong>Technical Details:</strong><br>
@@ -240,7 +221,6 @@
         </div>
         {% endif %}
 
-        <!-- Timestamp -->
         {% if show_timestamp %}
         <div class="error-timestamp">
             Error occurred at: {{ timestamp or moment().format('YYYY-MM-DD HH:mm:ss UTC') }}
@@ -250,7 +230,7 @@
         <!-- Action Buttons -->
         <div class="action-buttons">
             <a href="{{ home_url or '/' }}" class="btn btn-primary">
-                🏠 Go Home
+                ← Go Home
             </a>
             
             {% if show_back_button %}
@@ -261,18 +241,17 @@
 
             {% if show_retry_button %}
             <button onclick="window.location.reload()" class="btn btn-secondary">
-                🔄 Try Again
+                ↻ Try Again
             </button>
             {% endif %}
 
             {% if contact_url %}
             <a href="{{ contact_url }}" class="btn btn-secondary">
-                💬 Contact Support
+                ✆ Contact Support
             </a>
             {% endif %}
         </div>
 
-        <!-- Support Information -->
         {% if show_support_info %}
         <div class="support-info">
             {% if request_id %}
@@ -291,7 +270,6 @@
     </div>
 
     <script>
-        // Auto-retry for certain error types
         {% if auto_retry and error_code in [502, 503, 504] %}
         setTimeout(function() {
             if (confirm('Would you like to try reloading the page?')) {
@@ -300,7 +278,6 @@
         }, {{ retry_delay or 5000 }});
         {% endif %}
 
-        // Analytics tracking (if needed)
         {% if track_errors %}
         if (typeof gtag !== 'undefined') {
             gtag('event', 'exception', {
