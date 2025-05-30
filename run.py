@@ -25,13 +25,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-def get_local_time():
-    try:
-        return datetime.now()
-    except Exception as e:
-        print(f"Timezone error: {e}")
-        return datetime.now()
-
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -49,7 +42,7 @@ class AttendanceRecord(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
     date = db.Column(db.Date, nullable=False, default=date.today)
-    time = db.Column(db.DateTime, default=get_local_time)
+    time = db.Column(db.DateTime, nullable=False)
     status = db.Column(db.String(20), default='present')
     confidence_score = db.Column(db.Float)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -303,7 +296,7 @@ def submit_attendance():
             student_id=student.id,
             confidence_score=confidence,
             status='present',
-            time=get_local_time(),
+            time=datetime.now(),
             date=today
         )
 
