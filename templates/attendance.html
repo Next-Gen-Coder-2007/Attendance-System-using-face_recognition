@@ -656,7 +656,7 @@
                         externalCamera = videoDevices[1];
                     }
 
-                    const stream = await navigator.mediaDevices.getUserMedia({
+                    stream = await navigator.mediaDevices.getUserMedia({
                         video: {
                             width: { ideal: 640 },
                             height: { ideal: 480 },
