@@ -816,13 +816,13 @@
                     const devices = await navigator.mediaDevices.enumerateDevices();
                     const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-                    let externalCamera = videoDevices[0];
+                    const externalCamera = videoDevices[0];
 
                     if (!externalCamera) {
                         externalCamera = videoDevices[1];
                     }
 
-                    const stream = await navigator.mediaDevices.getUserMedia({
+                    stream = await navigator.mediaDevices.getUserMedia({
                         video: {
                             width: { ideal: 640 },
                             height: { ideal: 480 },
