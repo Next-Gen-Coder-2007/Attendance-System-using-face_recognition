@@ -290,7 +290,7 @@ def submit_attendance():
         ).first()
 
         if existing_record:
-            flash(f'Attendance already recorded for {student.name} today at {existing_record.time.astimezone(pytz.timezone(\'Asia/Kolkata\')).strftime("%I:%M:%S %p")}.', 'warning')
+            flash(f"Attendance already recorded for {student.name} today at {existing_record.time.astimezone(pytz.timezone('Asia/Kolkata')).strftime('%I:%M:%S %p')}.", 'warning')
             return redirect(url_for('attendance_page'))
 
         ist = pytz.timezone('Asia/Kolkata')
