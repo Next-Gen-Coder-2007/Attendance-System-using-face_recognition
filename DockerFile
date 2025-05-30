@@ -21,4 +21,4 @@ COPY . /app
 WORKDIR /app
 
 # Run your Flask app
-CMD ["python", "app.py"]
+CMD ["python", "run.py"]
