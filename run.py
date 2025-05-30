@@ -293,10 +293,9 @@ def submit_attendance():
             date=today
         ).first()
 
-        utc_time = utc.localize(existing_record.time) if existing_record.time.tzinfo is None else existing_record.time
-        ist_time = utc_time.astimezone(ist)
-        
         if existing_record:
+            utc_time = utc.localize(existing_record.time) if existing_record.time.tzinfo is None else existing_record.time
+            ist_time = utc_time.astimezone(ist)
             flash(f"Attendance already recorded for {student.name} today at {ist_time.strftime('%I:%M:%S %p')}.", 'warning')
             return redirect(url_for('attendance_page'))
 
