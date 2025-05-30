@@ -21,7 +21,7 @@ from io import BytesIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key-here'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///face_attendance.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://attendance_management_sd9w_user:jR6W58aVLDt11Werx7bJuQjaFNgGGhWW@dpg-d0snkn3uibrs73ajv0ig-a.virginia-postgres.render.com/attendance_management_sd9w'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
