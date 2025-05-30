@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if error_code %}{{ error_code }} - {% endif %}{{ error_title or "Error" }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .error-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .error-code {
+            font-size: 6rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .error-details {
+            background: #f8f9fa;
+            border-left: 4px solid #e74c3c;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #666;
+            overflow-x: auto;
+        }
+
+        .error-timestamp {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .action-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .support-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .request-id {
+            font-family: 'Courier New', monospace;
+            background: #f1f3f4;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .error-code {
+                font-size: 4rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <!-- Error Icon based on error type -->
+        <div class="error-icon">
+            {% if error_code == 404 %}
+                🔍
+            {% elif error_code == 403 %}
+                🔒
+            {% elif error_code == 500 %}
+                ⚠️
+            {% elif error_code in [502, 503, 504] %}
+                🌐
+            {% else %}
+                ❌
+            {% endif %}
+        </div>
+
+        <!-- Error Code Display -->
+        {% if error_code %}
+        <div class="error-code">{{ error_code }}</div>
+        {% endif %}
+
+        <!-- Error Title -->
+        <h1 class="error-title">
+            {% if error_title %}
+                {{ error_title }}
+            {% else %}
+                {% if error_code == 404 %}
+                    Page Not Found
+                {% elif error_code == 403 %}
+                    Access Forbidden
+                {% elif error_code == 500 %}
+                    Internal Server Error
+                {% elif error_code == 502 %}
+                    Bad Gateway
+                {% elif error_code == 503 %}
+                    Service Unavailable
+                {% elif error_code == 504 %}
+                    Gateway Timeout
+                {% else %}
+                    Something Went Wrong
+                {% endif %}
+            {% endif %}
+        </h1>
+
+        <!-- Error Message -->
+        <div class="error-message">
+            {% if error_message %}
+                {{ error_message }}
+            {% else %}
+                {% if error_code == 404 %}
+                    The page you're looking for doesn't exist or has been moved.
+                {% elif error_code == 403 %}
+                    You don't have permission to access this resource.
+                {% elif error_code == 500 %}
+                    We're experiencing technical difficulties. Please try again later.
+                {% elif error_code in [502, 503, 504] %}
+                    Our servers are temporarily unavailable. Please try again in a few moments.
+                {% else %}
+                    An unexpected error occurred. We're working to fix it.
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <!-- Technical Details (for development/debugging) -->
+        {% if show_details and (error_details or exception_message) %}
+        <div class="error-details">
+            <strong>Technical Details:</strong><br>
+            {% if exception_message %}
+                <strong>Exception:</strong> {{ exception_message }}<br>
+            {% endif %}
+            {% if error_details %}
+                {{ error_details | replace('\n', '<br>') | safe }}
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Timestamp -->
+        {% if show_timestamp %}
+        <div class="error-timestamp">
+            Error occurred at: {{ timestamp or moment().format('YYYY-MM-DD HH:mm:ss UTC') }}
+        </div>
+        {% endif %}
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="{{ home_url or '/' }}" class="btn btn-primary">
+                🏠 Go Home
+            </a>
+            
+            {% if show_back_button %}
+            <button onclick="history.back()" class="btn btn-secondary">
+                ← Go Back
+            </button>
+            {% endif %}
+
+            {% if show_retry_button %}
+            <button onclick="window.location.reload()" class="btn btn-secondary">
+                🔄 Try Again
+            </button>
+            {% endif %}
+
+            {% if contact_url %}
+            <a href="{{ contact_url }}" class="btn btn-secondary">
+                💬 Contact Support
+            </a>
+            {% endif %}
+        </div>
+
+        <!-- Support Information -->
+        {% if show_support_info %}
+        <div class="support-info">
+            {% if request_id %}
+            <p><strong>Request ID:</strong> <span class="request-id">{{ request_id }}</span></p>
+            {% endif %}
+            
+            {% if support_email %}
+            <p>Need help? Contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a></p>
+            {% endif %}
+            
+            {% if status_page_url %}
+            <p>Check our <a href="{{ status_page_url }}" target="_blank">status page</a> for system updates</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Auto-retry for certain error types
+        {% if auto_retry and error_code in [502, 503, 504] %}
+        setTimeout(function() {
+            if (confirm('Would you like to try reloading the page?')) {
+                window.location.reload();
+            }
+        }, {{ retry_delay or 5000 }});
+        {% endif %}
+
+        // Analytics tracking (if needed)
+        {% if track_errors %}
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'exception', {
+                'description': '{{ error_code }} - {{ error_title or "Error" }}',
+                'fatal': false
+            });
+        }
+        {% endif %}
+    </script>
+</body>
+</html>
