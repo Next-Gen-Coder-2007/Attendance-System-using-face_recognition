@@ -8,7 +8,6 @@ from PIL import Image
 import io
 import face_recognition
 import json
-import pytz
 import csv
 from io import StringIO
 from flask import make_response
@@ -28,7 +27,7 @@ db = SQLAlchemy(app)
 
 def get_local_time():
     try:
-        return datetime.now(pytz.timezone('Asia/Kolkata'))
+        return datetime.now()
     except Exception as e:
         print(f"Timezone error: {e}")
         return datetime.now()
