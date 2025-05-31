@@ -303,7 +303,7 @@ def submit_attendance():
             student_id=student.id,
             confidence_score=confidence,
             status='present',
-            time=datetime.utcnow(),
+            time=datetime.utcnow() + timedelta(hours=5, minutes=30),
             date=today
         )
 
