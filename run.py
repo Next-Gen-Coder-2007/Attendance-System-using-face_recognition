@@ -32,7 +32,7 @@ class Student(db.Model):
     student_id = db.Column(db.String(50), unique=True)
     email = db.Column(db.String(120))
     face_encoding = db.Column(db.Text)  
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow() + timedelta(hours=5, minutes=30))
 
     attendance_records = db.relationship('AttendanceRecord', backref='student', lazy=True, cascade='all, delete-orphan')
 
@@ -42,11 +42,11 @@ class Student(db.Model):
 class AttendanceRecord(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
-    date = db.Column(db.Date, nullable=False, default=date.today)
+    date = db.Column(db.Date, nullable=False, default=lambda: (datetime.utcnow() + timedelta(hours=5, minutes=30)).date())
     time = db.Column(db.DateTime, nullable=False)
     status = db.Column(db.String(20), default='present')
     confidence_score = db.Column(db.Float)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow() + timedelta(hours=5, minutes=30))
 
     def __repr__(self):
         return f'<AttendanceRecord {self.student.name} - {self.date}>'
